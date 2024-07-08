@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeBudgetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+Route::get('/', [HomeBudgetController::class, 'index'])
+->name('index');
+
+Route::post('/store', [HomeBudgetController::class, 'store'])
+->name('store');
