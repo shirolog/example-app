@@ -19,5 +19,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeBudgetController::class, 'index'])
 ->name('index');
 
+
 Route::post('/store', [HomeBudgetController::class, 'store'])
 ->name('store');
+
+
+Route::get('/edit/{homeBudget}', [HomeBudgetController::class, 'edit'])
+->name('homebudget.edit');
+Route::put('/edit/{homeBudget}', [HomeBudgetController::class, 'update'])
+->name('homebudget.update');
+
+
+
+Route::delete('index/{homeBudget}', [HomeBudgetController::class, 'destroy'])
+->name('homebudget.destroy');

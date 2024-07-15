@@ -24,7 +24,10 @@ h2 {
     margin-bottom: 20px;
     width: 100%;
     flex: 1 1 20rem;
+
 }
+
+
 
 .balance h3 {
     margin-top: 0;
@@ -49,6 +52,8 @@ h2 {
 .balance tbody tr:nth-child(odd) {
 background: #f2f2f2;
 }
+
+
 
 .add-balance {
     width: 100%;
@@ -113,6 +118,7 @@ background: #f2f2f2;
 .pagination {
     list-style: none;
     display: flex;
+
 }
 
 .pagination li {
@@ -134,7 +140,13 @@ background: #f2f2f2;
     padding: 15px;
 }
 
+.text-muted{
+    display: none;
+}
 
+.page-link{
+    margin: 0;
+}
 
 .button-td {
     display: flex;
@@ -142,7 +154,7 @@ background: #f2f2f2;
 }
 
 .button-td input,
-.edit-button,
+
 .delete-button {
     padding: 8px 16px;
     color: #fff;
@@ -152,7 +164,6 @@ background: #f2f2f2;
 }
 
 .edit-button {
-    margin-right: 20px;
     background-color: orange;
     text-decoration: none;
 }
@@ -184,13 +195,13 @@ background: #f2f2f2;
     font-weight: bold;
 }
 
-.form-balance input, .form-balance select {
+.form-balance input, .form-balance select,
+.button-container a {
     position: relative;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 8px;
-    margin-bottom: 10px;
 }
 
 .form-balance button, 
@@ -202,6 +213,9 @@ background: #f2f2f2;
     border-radius: 4px;
     cursor: pointer;
 }
+
+
+
 
 .form-balance button, a {
     margin-top: 20px;
@@ -234,13 +248,30 @@ background: #f2f2f2;
 
 .button-container {
     text-align: center;
+    
 }
 
-.button-container .edit-button,
-.back-button {
-    width: 40%;
-    cursor: pointer;
+
+
+
+.flex-btn{
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1.5;
+    flex-wrap: wrap;
 }
+
+.flex-btn .edit-button,
+.flex-btn .back-button{
+    display: inline-block;
+    padding: 8px 50px;
+}
+
+.flex-btn .back-button{
+    font-size: 13px;
+}
+
+
 
 .flex {
     display: flex;
@@ -261,4 +292,25 @@ background: #f2f2f2;
 
 .error{
     color: tomato;
+}
+
+.page-item:first-child .page-link{
+    margin-right: calc(var(--bs-border-width)* -.7);
+}
+.page-item:not(:first-child) .page-link{
+    margin-left: calc(var(--bs-border-width)* -.7);
+}
+.page-item:not(:last-child) .page-link{
+    margin-left: calc(var(--bs-border-width)* -.7);
+}
+
+
+
+/* media query */
+
+@media screen and (max-width:768px) {
+    .flex-btn .edit-button,
+    .flex-btn .back-button{
+        padding: 8px 20px;
+    }
 }

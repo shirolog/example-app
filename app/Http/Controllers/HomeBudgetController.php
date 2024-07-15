@@ -12,11 +12,13 @@ class HomeBudgetController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-         $categories = Category::all();
-         $homeBudget = HomeBudget::with('category')->get();
+    {   
+        $categories = Category::all();
 
-        return view('homebudget.index', compact('categories', 'homeBudget'));
+        $homeBudgets = HomeBudget::with('category')
+        ->orderBy('date', 'desc')
+        ->paginate(5);
+        return view('homebudget.index', compact('homeBudgets', 'categories'));
     }
 
     /**
@@ -66,9 +68,12 @@ class HomeBudgetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(HomeBudget $homeBudget)
-    {
-        //
+    public function edit($id)
+    {   
+        $homeBudget = HomeBudget::find($id);
+        $categories = Category::all();
+        return view('homebudget.edit', compact('homeBudget', 'categories'));
+      
     }
 
     /**
@@ -76,14 +81,36 @@ class HomeBudgetController extends Controller
      */
     public function update(Request $request, HomeBudget $homeBudget)
     {
-        //
+        // バリデーションルール
+        $request->validate([
+            'date' => 'required|date',
+            'category' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+    
+        // データの更新
+        $homeBudget->update([
+            'date' => $request->input('date'),
+            'category_id' => $request->input('category'),
+            'price' => $request->input('price'),
+        ]);
+    
+        // 更新後のリダイレクト
+        return redirect()->route('index', ['page' => $request->input('page')])
+        ->with('success', '支出を更新しました。');
     }
+    
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(HomeBudget $homeBudget)
     {
-        //
+        $homeBudget->delete();
+        $page = request()->input('page');
+       
+        return redirect()->route('index', ['page' => $page])
+        ->with('success',  '収支を削除しました。');
     }
 }
